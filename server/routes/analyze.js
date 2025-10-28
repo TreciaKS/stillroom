@@ -5,18 +5,24 @@ dotenv.config();
 
 const router = express.Router();
 
-const AI_API_URL = process.env.AI_API_URL; // e.g. https://api.groq.com/openai/v1/chat/completions
-const AI_API_KEY = process.env.AI_API_KEY;
-const MODEL = process.env.MODEL || "gpt-4o-mini"; // default if not provided
+// Using Groq&apos;s OpenAI-compatible endpoint
+const AI_API_URL =
+  process.env.AI_API_URL || "https://api.groq.com/openai/v1/chat/completions";
+const AI_API_KEY = process.env.GROQ_API_KEY || process.env.AI_API_KEY;
+const MODEL = process.env.MODEL || "llama-3.3-70b-versatile"; // Groq model
 
 if (!AI_API_URL || !AI_API_KEY) {
-  console.warn(
-    "AI_API_URL or AI_API_KEY not set — /analyze will fail until set."
-  );
+  console.warn("⚠️  AI_API_URL or GROQ_API_KEY not set — /analyze will fail.");
 }
 
-// The controlled system prompt for Stillroom's voice
-const SYSTEM_PROMPT = `You are Stillroom, a reflective AI presence. You listen deeply and respond with calm, layered insight. You do not give direct advice or prescriptive steps. Respond in brief, deliberate sentences that are poetic but clear. Keep lines short and empathetic.`;
+// The Stillroom voice prompt
+const SYSTEM_PROMPT = `
+You are Stillroom — a reflective AI presence. 
+You listen deeply and respond with calm, layered insight.
+You do not give advice or instructions.
+You reflect emotion, tone, and perspective in brief, poetic sentences.
+Keep your language empathetic and minimal.
+`;
 
 router.post("/", async (req, res) => {
   try {
@@ -27,19 +33,19 @@ router.post("/", async (req, res) => {
 
     const messages = [
       { role: "system", content: SYSTEM_PROMPT },
-      { role: "user", content: `Entry: ${entry}` },
+      { role: "user", content: entry },
     ];
 
-    // optionally alter prompt by tone
+    // Optional tone control
     if (tone === "gentle") {
       messages.push({
         role: "system",
-        content: "Tone: gentler, softer language.",
+        content: "Tone: gentler, softer, nurturing language.",
       });
     } else if (tone === "direct") {
       messages.push({
         role: "system",
-        content: "Tone: slightly more direct, concise.",
+        content: "Tone: more concise, minimal, yet still compassionate.",
       });
     }
 
@@ -55,12 +61,8 @@ router.post("/", async (req, res) => {
       Authorization: `Bearer ${AI_API_KEY}`,
     };
 
-    const aiRes = await axios.post(AI_API_URL, payload, {
-      headers,
-      timeout: 30000,
-    });
+    const aiRes = await axios.post(AI_API_URL, payload, { headers });
 
-    // Try to handle both OpenAI-style and some provider differences
     let reflection = "";
     if (aiRes.data?.choices?.[0]?.message?.content) {
       reflection = aiRes.data.choices[0].message.content;
@@ -72,11 +74,12 @@ router.post("/", async (req, res) => {
       reflection = JSON.stringify(aiRes.data).slice(0, 1000);
     }
 
-    return res.json({ reflection: reflection.trim() });
+    res.json({ reflection: reflection.trim() });
   } catch (err) {
     console.error("Analyze error:", err?.response?.data || err.message || err);
-    const message = err?.response?.data?.error?.message || "AI service error";
-    return res.status(500).json({ error: message });
+    const message =
+      err?.response?.data?.error?.message || "AI service error (Groq)";
+    res.status(500).json({ error: message });
   }
 });
 
