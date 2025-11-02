@@ -1,16 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Reflection from "./components/Reflection";
 
-interface HistoryItem {
+type HistoryItem = {
   entry: string;
-  reflection: string;
+  language?: string;
+  reflection?: string;
   ts: number;
-}
+};
 
 export default function Home() {
   const [entry, setEntry] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
   const [reflection, setReflection] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -26,59 +28,75 @@ export default function Home() {
   const submit = async () => {
     setError("");
     if (!entry.trim()) {
-      setError("Write something — even a line.");
+      setError("Paste a code snippet to get an explanation.");
       return;
     }
     setLoading(true);
     setReflection("");
     try {
-      const res = await axios.post(`${backendUrl}/analyze`, { entry });
-      const reflectionText: string = res.data.reflection;
+      const res = await axios.post(`${backendUrl}/analyze`, {
+        entry,
+        language,
+      });
+      const text: string = res.data.reflection;
+      setReflection(text);
 
-      setReflection(reflectionText);
-      const newHistory: HistoryItem[] = [
-        { entry, reflection: reflectionText, ts: Date.now() },
+      const newHist = [
+        { entry, language, reflection: text, ts: Date.now() },
         ...history,
       ].slice(0, 30);
-
-      setHistory(newHistory);
-      localStorage.setItem("stillroom_history", JSON.stringify(newHistory));
-    } catch (err: any) {
-      console.error(err);
-      setError(err?.response?.data?.error || "Something went wrong.");
+      setHistory(newHist);
+      localStorage.setItem("stillroom_history", JSON.stringify(newHist));
+    } catch (err: unknown) {
+      console.log(err);
+      if (err === "string") {
+        setError(err || "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start p-8">
-      <div className="w-full max-w-3xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-4xl font-light tracking-tight text-amberish">
-            Stillroom
-          </h1>
-          <p className="mt-2 text-neutral-400 italic">
-            For thoughts that need time to breathe.
+    <main className="min-h-screen flex items-start justify-center p-8">
+      <div className="w-full max-w-4xl">
+        <header className="mb-6">
+          <h1 className="text-4xl font-light text-amberish">Stillroom</h1>
+          <p className="text-neutral-400 italic">
+            For when your code needs to make sense.
           </p>
         </header>
 
-        <section className="bg-neutral-950 border border-neutral-800 p-6 rounded-3xl">
+        <section className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
           <textarea
             value={entry}
             onChange={(e) => setEntry(e.target.value)}
-            placeholder="Write what’s on your mind..."
-            className="w-full h-40 p-4 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-amberish"
+            placeholder="Paste your code here..."
+            className="w-full h-60 p-4 rounded-xl bg-neutral-950 border border-neutral-800 text-neutral-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amberish"
           />
 
-          <div className="mt-4 flex items-center gap-3">
+          <div className="flex gap-3 mt-4 items-center">
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-3 py-2"
+            >
+              <option value="">Autodetect</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="TypeScript">TypeScript</option>
+              <option value="C#">C#</option>
+              <option value="Python">Python</option>
+              <option value="SQL">SQL</option>
+            </select>
+
             <button
               onClick={submit}
               disabled={loading}
-              className="px-4 py-2 rounded-lg bg-amberish text-black font-medium hover:opacity-95 transition disabled:opacity-60"
+              className="px-4 py-2 rounded-lg bg-amberish text-black font-medium disabled:opacity-60"
             >
-              {loading ? "Reflecting…" : "Reflect"}
+              {loading ? "Explaining…" : "Explain"}
             </button>
+
             <button
               onClick={() => {
                 setEntry("");
@@ -90,15 +108,15 @@ export default function Home() {
             </button>
           </div>
 
-          {error && <p className="mt-3 text-sm text-rose-400">{error}</p>}
+          {error && <p className="mt-3 text-rose-400">{error}</p>}
           {reflection && <Reflection text={reflection} />}
         </section>
 
-        <aside className="mt-8">
-          <h3 className="text-neutral-400 text-sm mb-2">Past Sessions</h3>
+        <aside className="mt-6">
+          <h3 className="text-neutral-400 text-sm mb-2">History</h3>
           <div className="space-y-3">
             {history.length === 0 && (
-              <p className="text-neutral-600">No saved sessions yet.</p>
+              <p className="text-neutral-600">No saved explanations yet.</p>
             )}
             {history.map((h, i) => (
               <div
@@ -109,6 +127,7 @@ export default function Home() {
                   {h.entry}
                 </div>
                 <div className="text-neutral-500 text-xs mt-1">
+                  {h.language ?? "Auto-detect"} •{" "}
                   {new Date(h.ts).toLocaleString()}
                 </div>
               </div>

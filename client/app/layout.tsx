@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-// @ts-ignore
+// @ts-expect-error because it is a default import
 import "./globals.css";
 import type { ReactNode } from "react";
 
 export const metadata = {
-  title: "Stillroom",
-  description: "For thoughts that need time to breathe.",
+  title: "Stillroom — Code Explainer",
+  description: "Paste code. Understand code. Stillroom explains it gently."
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-neutral-950 text-neutral-100">{children}</body>
     </html>
   );
 }

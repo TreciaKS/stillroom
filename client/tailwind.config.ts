@@ -1,15 +1,9 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+module.exports = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        amberish: "#ffc87c",
-      },
-      animation: {
-        fadeIn: "fadeIn 450ms ease both",
-      },
+      colors: { amberish: "#ffc87c" },
+      animation: { fadeIn: "fadeIn 450ms ease both" },
       keyframes: {
         fadeIn: {
           "0%": { opacity: 0, transform: "translateY(6px)" },
@@ -20,5 +14,3 @@ const config: Config = {
   },
   plugins: [],
 };
-
-export default config
