@@ -1,0 +1,87 @@
+/* Stillroom Dark Highlight.js Theme */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #0b0b0d;
+  color: #d1d5db;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Comments, quotes */
+.hljs-comment,
+.hljs-quote {
+  color: #5e5e68;
+  font-style: italic;
+}
+
+/* Keywords, control flow */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #ffc87c;
+  font-weight: 500;
+}
+
+/* Strings, chars */
+.hljs-string,
+.hljs-doctag {
+  color: #bdb2ff;
+}
+
+/* Numbers, constants */
+.hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet {
+  color: #7ee0e0;
+}
+
+/* Function names */
+.hljs-title,
+.hljs-section {
+  color: #ffd27f;
+  font-weight: 600;
+}
+
+/* Types and classes */
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #ffbb80;
+  font-weight: 500;
+}
+
+/* Attributes, variables */
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable {
+  color: #e2bfff;
+}
+
+/* Built-ins and tags */
+.hljs-built_in,
+.hljs-tag {
+  color: #f7ba50;
+}
+
+/* Addition / diff highlight */
+.hljs-addition {
+  color: #a4fba6;
+  background: rgba(164, 251, 166, 0.05);
+}
+
+/* Deletion / diff highlight */
+.hljs-deletion {
+  color: #ff9e9e;
+  background: rgba(255, 158, 158, 0.05);
+}
+
+/* Emphasis and strong */
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 600;
+}
