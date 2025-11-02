@@ -11,10 +11,12 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "axios": "^1.13.0",
+    "highlight.js": "^11.11.1",
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
