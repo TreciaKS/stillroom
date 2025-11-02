@@ -3,7 +3,10 @@ import type { ReactNode } from "react";
 
 export const metadata = {
   title: "Stillroom — Code Explainer",
-  description: "Paste code. Understand code. Stillroom explains it gently."
+  description: "Paste code. Understand code. Stillroom explains it gently.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -39,7 +39,9 @@ export default function LandingPage() {
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,200,124,0.07)";
+        ctx.fillStyle = "rgba(255, 200, 124, 0.25)"; // brighter amber
+        ctx.shadowColor = "rgba(255, 200, 124, 0.15)";
+        ctx.shadowBlur = 12;
         ctx.fill();
         p.x += p.dx;
         p.y += p.dy;
@@ -59,10 +61,10 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#050506] text-neutral-100">
+    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#070707] text-neutral-100">
       {/* Background */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-50" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#0b0b0d,_#060607_60%)] z-0" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-10 opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,#0b0b0d,#060607_60%)]z-0" />
 
       {/* Navbar */}
       <header className="absolute top-0 left-0 w-full backdrop-blur-md bg-black/10 border-b border-white/5 z-10">
@@ -125,6 +127,73 @@ export default function LandingPage() {
           >
             View Source
           </a>
+        </motion.div>
+      </section>
+
+      {/* Demo Section */}
+      <section
+        id="demo"
+        className="relative z-10 flex flex-col items-center justify-center text-center py-32 px-4 overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#0b0b0d,#050506)] opacity-90" />
+        <div className="absolute inset-0 flex justify-center">
+          <div className="w-[600px] h-[600px] bg-amberish/5 blur-3xl rounded-full" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="relative z-10 max-w-3xl w-full bg-neutral-950/50 border border-neutral-800 rounded-2xl backdrop-blur-lg shadow-lg shadow-black/20 p-8 text-left"
+        >
+          <h3 className="text-neutral-300 font-medium mb-4 text-sm uppercase tracking-widest">
+            See Stillroom in Action
+          </h3>
+
+          {/* Code Input Simulation */}
+          <motion.pre
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1.2 }}
+            className="bg-neutral-900 rounded-xl p-5 text-sm font-mono text-neutral-200 mb-6 border border-neutral-800 overflow-x-auto"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 1 }}
+            >
+              <span className="text-amberish">function</span> greet(name) {"{"}
+              {"\n"}
+              &nbsp;&nbsp;console.log(
+              <span className="text-[#bdb2ff]">`Hello, ${"{name}"}`</span>);
+              {"\n"}
+              {"}"}
+              {"\n"}
+              greet(<span className="text-[#bdb2ff]">&quot;World&quot;</span>);
+            </motion.div>
+          </motion.pre>
+
+          {/* AI Reflection */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 3, duration: 1 }}
+            className="text-neutral-400 text-base leading-relaxed"
+          >
+            <p className="mb-2">
+              <strong className="text-amberish">Stillroom:</strong> This
+              function defines a simple greeting routine.
+            </p>
+            <p className="text-neutral-500">
+              It prints{" "}
+              <code className="bg-neutral-900 text-amberish px-1 py-0.5 rounded">
+                Hello, World!
+              </code>{" "}
+              — demonstrating how template literals inject variables in
+              JavaScript.
+            </p>
+          </motion.div>
         </motion.div>
       </section>
 

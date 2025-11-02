@@ -6,12 +6,17 @@ code, pre {
   font-family: 'JetBrains Mono', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* avoids navbar overlap */
+}
+
 * {
   color: white;
 }
 
 body {
-  background: radial-gradient(circle at 30% 50%, #0d0d11, #070708, #050506);
+  background: radial-gradient(circle at 30% 50%, #fdfdfe, #cacaca, #050506);
   animation: stillroomGlow 18s ease-in-out infinite alternate;
   background-attachment: fixed;
   transition: background 2s ease;
