@@ -6,6 +6,10 @@ code, pre {
   font-family: 'JetBrains Mono', monospace;
 }
 
+* {
+  color: white;
+}
+
 body {
   background: radial-gradient(circle at 30% 50%, #0d0d11, #070708, #050506);
   animation: stillroomGlow 18s ease-in-out infinite alternate;

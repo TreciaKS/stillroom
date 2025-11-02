@@ -1,140 +1,215 @@
 "use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Reflection from "./components/Reflection";
 
-type HistoryItem = {
-  entry: string;
-  language?: string;
-  reflection?: string;
-  ts: number;
-};
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
-export default function Home() {
-  const [entry, setEntry] = useState<string>("");
-  const [language, setLanguage] = useState<string>("");
-  const [reflection, setReflection] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [history, setHistory] = useState<HistoryItem[]>([]);
+export default function LandingPage() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-
+  // 🌫️ Floating particles for background
   useEffect(() => {
-    const saved = localStorage.getItem("stillroom_history");
-    if (saved) setHistory(JSON.parse(saved));
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+    const particles: {
+      x: number;
+      y: number;
+      r: number;
+      dx: number;
+      dy: number;
+    }[] = [];
+
+    for (let i = 0; i < 35; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.8 + 0.5,
+        dx: (Math.random() - 0.5) * 0.15,
+        dy: (Math.random() - 0.5) * 0.15,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,200,124,0.07)";
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > width) p.dx *= -1;
+        if (p.y < 0 || p.y > height) p.dy *= -1;
+      }
+      requestAnimationFrame(animate);
+    };
+    animate();
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const submit = async () => {
-    setError("");
-    if (!entry.trim()) {
-      setError("Paste a code snippet to get an explanation.");
-      return;
-    }
-    setLoading(true);
-    setReflection("");
-    try {
-      const res = await axios.post(`${backendUrl}/analyze`, {
-        entry,
-        language,
-      });
-      const text: string = res.data.reflection;
-      setReflection(text);
-
-      const newHist = [
-        { entry, language, reflection: text, ts: Date.now() },
-        ...history,
-      ].slice(0, 30);
-      setHistory(newHist);
-      localStorage.setItem("stillroom_history", JSON.stringify(newHist));
-    } catch (err: unknown) {
-      console.log(err);
-      if (err === "string") {
-        setError(err || "Something went wrong.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <main className="min-h-screen flex items-start justify-center p-8">
-      <div className="w-full max-w-4xl">
-        <header className="mb-6">
-          <h1 className="text-4xl font-light text-amberish">Stillroom</h1>
-          <p className="text-neutral-400 italic">
-            For when your code needs to make sense.
-          </p>
-        </header>
+    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#050506] text-neutral-100">
+      {/* Background */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#0b0b0d,_#060607_60%)] z-0" />
 
-        <section className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
-          <textarea
-            value={entry}
-            onChange={(e) => setEntry(e.target.value)}
-            placeholder="Paste your code here..."
-            className="w-full h-60 p-4 rounded-xl bg-neutral-950 border border-neutral-800 text-neutral-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amberish"
-          />
+      {/* Navbar */}
+      <header className="absolute top-0 left-0 w-full backdrop-blur-md bg-black/10 border-b border-white/5 z-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+          <h1 className="text-lg font-medium text-amberish tracking-tight">
+            Stillroom
+          </h1>
+          <nav className="flex gap-6 text-sm text-neutral-400">
+            <a href="#features" className="hover:text-amberish transition">
+              Features
+            </a>
+            <a href="#mission" className="hover:text-amberish transition">
+              Mission
+            </a>
+            <a href="#cta" className="hover:text-amberish transition">
+              Start
+            </a>
+          </nav>
+        </div>
+      </header>
 
-          <div className="flex gap-3 mt-4 items-center">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-3 py-2"
-            >
-              <option value="">Autodetect</option>
-              <option value="JavaScript">JavaScript</option>
-              <option value="TypeScript">TypeScript</option>
-              <option value="C#">C#</option>
-              <option value="Python">Python</option>
-              <option value="SQL">SQL</option>
-            </select>
+      {/* Hero */}
+      <section className="relative z-10 flex flex-col items-center text-center px-6 mt-32">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="text-6xl md:text-7xl font-light text-amberish mb-5 tracking-tight"
+        >
+          Understand Code. <br className="hidden sm:block" />
+          <span className="text-neutral-200">Beautifully.</span>
+        </motion.h1>
 
-            <button
-              onClick={submit}
-              disabled={loading}
-              className="px-4 py-2 rounded-lg bg-amberish text-black font-medium disabled:opacity-60"
-            >
-              {loading ? "Explaining…" : "Explain"}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="text-neutral-400 max-w-xl mx-auto text-lg mb-10"
+        >
+          A calm, free AI tool for developers who want to learn through clarity
+          — not chaos.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="flex gap-4"
+        >
+          <Link href="/app">
+            <button className="px-8 py-3 rounded-xl bg-amberish text-black font-medium hover:opacity-90 transition">
+              Launch Stillroom
             </button>
+          </Link>
+          <a
+            href="https://github.com/TreciaKS/stillroom"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3 rounded-xl border border-neutral-700 text-neutral-300 hover:text-amberish hover:border-amberish transition"
+          >
+            View Source
+          </a>
+        </motion.div>
+      </section>
 
-            <button
-              onClick={() => {
-                setEntry("");
-                setReflection("");
-              }}
-              className="px-3 py-2 rounded-lg border border-neutral-700 text-neutral-300"
+      {/* Features */}
+      <section
+        id="features"
+        className="relative z-10 max-w-6xl mx-auto px-8 py-32 text-center"
+      >
+        <h2 className="text-3xl font-light text-amberish mb-12">
+          What Stillroom Does
+        </h2>
+        <div className="grid md:grid-cols-3 gap-10 text-left">
+          {[
+            {
+              title: "Explain Code",
+              desc: "Paste any snippet — JavaScript, C#, Python — and get a calm, human-like explanation of what it does.",
+            },
+            {
+              title: "Refactor Intelligently",
+              desc: "Receive cleaner, more readable versions of your code without losing its original intent.",
+            },
+            {
+              title: "Learn in Layers",
+              desc: "Stillroom explains not just *what* happens, but *why* — helping you truly internalize each concept.",
+            },
+          ].map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * i, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 hover:border-amberish/40 transition"
             >
-              Clear
-            </button>
-          </div>
+              <h3 className="text-xl font-medium text-neutral-200 mb-3">
+                {f.title}
+              </h3>
+              <p className="text-neutral-400 leading-relaxed">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-          {error && <p className="mt-3 text-rose-400">{error}</p>}
-          {reflection && <Reflection text={reflection} />}
-        </section>
+      {/* Mission */}
+      <section
+        id="mission"
+        className="relative z-10 text-center px-8 py-28 border-t border-neutral-800"
+      >
+        <h2 className="text-3xl font-light text-amberish mb-4">
+          Free. Forever.
+        </h2>
+        <p className="text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          Stillroom isn’t here to monetize curiosity. It’s here to keep the
+          light on — to make understanding code accessible, quiet, and
+          permanent.
+        </p>
+      </section>
 
-        <aside className="mt-6">
-          <h3 className="text-neutral-400 text-sm mb-2">History</h3>
-          <div className="space-y-3">
-            {history.length === 0 && (
-              <p className="text-neutral-600">No saved explanations yet.</p>
-            )}
-            {history.map((h, i) => (
-              <div
-                key={i}
-                className="bg-neutral-900 border border-neutral-800 rounded-xl p-3"
-              >
-                <div className="text-neutral-300 text-sm italic truncate">
-                  {h.entry}
-                </div>
-                <div className="text-neutral-500 text-xs mt-1">
-                  {h.language ?? "Auto-detect"} •{" "}
-                  {new Date(h.ts).toLocaleString()}
-                </div>
-              </div>
-            ))}
-          </div>
-        </aside>
-      </div>
+      {/* CTA Footer */}
+      <section
+        id="cta"
+        className="relative z-10 flex flex-col items-center text-center py-32 border-t border-neutral-800"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl font-light text-neutral-100 mb-6"
+        >
+          Step into Stillroom
+        </motion.h2>
+        <p className="text-neutral-400 mb-10">
+          Your free space to explore and explain code — with calm precision.
+        </p>
+        <Link href="/app">
+          <button className="px-10 py-4 rounded-xl bg-amberish text-black font-medium hover:opacity-90 transition shadow-lg shadow-amberish/10">
+            Launch Now — It’s Free
+          </button>
+        </Link>
+      </section>
+
+      <footer className="absolute bottom-0 w-full text-center py-6 text-xs text-white border-t border-gray-700 ">
+        © {new Date().getFullYear()} Stillroom. Made with calm in South Africa
+        🌍
+      </footer>
     </main>
   );
 }
