@@ -2,13 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Reflection from "../components/Reflection";
-
-type HistoryItem = {
-  entry: string;
-  language?: string;
-  reflection?: string;
-  ts: number;
-};
+import { HistoryItem } from "../../types/types";
 
 export default function Home() {
   const [entry, setEntry] = useState<string>("");
@@ -58,28 +52,28 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex items-start justify-center p-8">
+    <main className="flex items-start justify-center min-h-screen p-8">
       <div className="w-full max-w-4xl">
         <header className="mb-6">
           <h1 className="text-4xl font-light text-amberish">Stillroom</h1>
-          <p className="text-neutral-400 italic">
+          <p className="italic text-neutral-400">
             For when your code needs to make sense.
           </p>
         </header>
 
-        <section className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
+        <section className="p-6 border bg-neutral-900 border-neutral-800 rounded-3xl">
           <textarea
             value={entry}
             onChange={(e) => setEntry(e.target.value)}
             placeholder="Paste your code here..."
-            className="w-full h-60 p-4 rounded-xl bg-neutral-950 border border-neutral-800 text-neutral-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amberish"
+            className="w-full p-4 font-mono text-sm border h-60 rounded-xl bg-neutral-950 border-neutral-800 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-amberish"
           />
 
-          <div className="flex gap-3 mt-4 items-center">
+          <div className="flex items-center gap-3 mt-4">
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-3 py-2"
+              className="px-3 py-2 border rounded-lg bg-neutral-900 border-neutral-800 text-neutral-300"
             >
               <option value="">Autodetect</option>
               <option value="JavaScript">JavaScript</option>
@@ -92,7 +86,7 @@ export default function Home() {
             <button
               onClick={submit}
               disabled={loading}
-              className="px-4 py-2 rounded-lg bg-amberish text-black font-medium disabled:opacity-60"
+              className="px-4 py-2 font-medium text-black rounded-lg bg-amberish disabled:opacity-60"
             >
               {loading ? "Explaining…" : "Explain"}
             </button>
@@ -102,7 +96,7 @@ export default function Home() {
                 setEntry("");
                 setReflection("");
               }}
-              className="px-3 py-2 rounded-lg border border-neutral-700 text-neutral-300"
+              className="px-3 py-2 border rounded-lg border-neutral-700 text-neutral-300"
             >
               Clear
             </button>
@@ -113,7 +107,7 @@ export default function Home() {
         </section>
 
         <aside className="mt-6">
-          <h3 className="text-neutral-400 text-sm mb-2">History</h3>
+          <h3 className="mb-2 text-sm text-neutral-400">History</h3>
           <div className="space-y-3">
             {history.length === 0 && (
               <p className="text-neutral-600">No saved explanations yet.</p>
@@ -121,12 +115,12 @@ export default function Home() {
             {history.map((h, i) => (
               <div
                 key={i}
-                className="bg-neutral-900 border border-neutral-800 rounded-xl p-3"
+                className="p-3 border bg-neutral-900 border-neutral-800 rounded-xl"
               >
-                <div className="text-neutral-300 text-sm italic truncate">
+                <div className="text-sm italic truncate text-neutral-300">
                   {h.entry}
                 </div>
-                <div className="text-neutral-500 text-xs mt-1">
+                <div className="mt-1 text-xs text-neutral-500">
                   {h.language ?? "Auto-detect"} •{" "}
                   {new Date(h.ts).toLocaleString()}
                 </div>
