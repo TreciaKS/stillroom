@@ -45,23 +45,11 @@ pre {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* avoids navbar overlap */
-  color:  var(--pure-white);
   background: var(--pure-black);
 }
 
 a:hover {
- color: var(--solar-sunlight);
-}
-
-button:hover,
-select:hover,
-textarea:focus {
-  box-shadow: 0 0 8px #90bde0;
-  transition: box-shadow 0.4s ease, transform 0.3s ease;
-}
-
-button:active {
-  transform: scale(0.98);
+ color: var(--solar-sand);
 }
 
 /* Smooth scrollbars (dark aesthetic) */

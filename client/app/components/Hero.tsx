@@ -3,35 +3,35 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative z-10 flex flex-col items-center px-6 mt-32 text-center">
+    <section className="relative flex flex-col items-center px-6 mt-32 text-center text-(--pure-silver) max-lg:py-3">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="mb-5 text-6xl font-light tracking-tight md:text-7xl text-amberish"
+        className="mb-5 text-6xl font-light tracking-widest md:text-7xl max-md:tracking-wide"
       >
-        Understand Code. <br className="hidden sm:block" />
-        <span className="text-neutral-200">Beautifully.</span>
+        Understand Code <br />
+        <span className="text-(--pure-silver)">Beautifully</span>
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 1 }}
-        className="max-w-xl mx-auto mb-10 text-lg text-neutral-400"
+        className="max-w-xl mx-auto mb-10 text-lg text-neutral-400 tracking-wider"
       >
-        A calm, free AI tool for developers who want to learn through clarity —
-        not chaos.
+        Because there&apos;s{" "}
+        <span className="text-(--pure-white)">still room</span> to learn
       </motion.p>
 
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 1 }}
-        className="flex gap-4"
+        className="flex gap-4 max-md:flex-col max-md:gap-y-5"
       >
         <Link href="/app">
-          <button className="px-8 py-3 font-medium text-black transition rounded-xl bg-amberish hover:opacity-90">
+          <button className="px-8 py-3 font-medium text-(--pure-silver) transition rounded-xl border border-(--pure-silver) hover:opacity-90">
             Launch Stillroom
           </button>
         </Link>
@@ -39,7 +39,7 @@ const Hero = () => {
           href="https://github.com/TreciaKS/stillroom"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-8 py-3 transition border rounded-xl border-neutral-700 text-neutral-300 hover:text-amberish hover:border-amberish"
+          className="px-8 py-3 transition border border-(--pure-gray) rounded-xl hover:border-(--solar-sand) hover:opacity-90"
         >
           View Source
         </a>
