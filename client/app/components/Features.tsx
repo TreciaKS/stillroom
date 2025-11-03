@@ -4,7 +4,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="relative z-10 w-full mx-auto px-8 max-md:min-h-dvh text-center bg-(--pure-white) text-(--pure-graphite) lg:py-22 md:py-5 max-md:-mb-14"
+      className="relative z-10 w-full mx-auto px-8 max-md:min-h-dvh text-center bg-(--pure-white) text-(--pure-graphite) lg:py-22 md:py-5 max-md:-mb-6"
     >
       <h2 className="text-3xl font-semibold mb-12 lg:text-6xl max-md:pb-3">
         What Stillroom Does
