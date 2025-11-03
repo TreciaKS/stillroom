@@ -12,7 +12,7 @@ export default function Home() {
   const [error, setError] = useState<string>("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL!;
 
   useEffect(() => {
     const saved = localStorage.getItem("stillroom_history");

@@ -1,40 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
-code, pre {
-  font-family: 'JetBrains Mono', monospace;
+code,
+pre {
+  font-family: "JetBrains Mono", monospace;
 }
 
+:root {
+  /* Core palette */
+  --pure-black: #0e0e0e;
+  --pure-graphite: #1e1e1e;
+  --pure-charcoal: #2c2c2c;
+  --pure-silver: #b7b7b7;
+  --pure-gray: #8d8d8d;
+  --pure-white: #e6e6e6;
+
+  --solar-yellow: #f5d244;
+  --solar-sky: #5eb8f2;
+  --solar-sand: #e2a65f;
+  --solar-sunlight: #fff6b3;
+  --solar-skin: #d48a4e;
+  --solar-ocean: #154e7a;
+
+  /* Semantic tokens */
+  --bg-00: var(--pure-black); /* main page background */
+  --bg-10: var(--pure-graphite); /* secondary background / panels */
+  --bg-20: var(--pure-charcoal); /* elevated surfaces */
+  --fg-primary: var(--pure-white); /* primary text */
+  --fg-muted: var(--pure-silver); /* secondary text */
+  --border: rgba(255, 255, 255, 0.06); /* subtle borders */
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 10px;
+
+  --elevation-1: 0 6px 18px rgba(0, 0, 0, 0.6);
+  --elevation-2: 0 12px 36px rgba(0, 0, 0, 0.65);
+
+  --focus: 2px solid rgba(183, 183, 183, 0.18);
+}
+
+*,
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* avoids navbar overlap */
+  color:  var(--pure-white);
+  background: var(--pure-black);
 }
 
-* {
-  color: white;
+a:hover {
+ color: var(--solar-sunlight);
 }
 
-body {
-  animation: stillroomGlow 18s ease-in-out infinite alternate;
-  background-attachment: fixed;
-  transition: background 2s ease;
-}
-
-@keyframes stillroomGlow {
-  0% {
-    background: radial-gradient(circle at 30% 50%, #0d0d11, #070708, #050506);
-  }
-  50% {
-    background: radial-gradient(circle at 70% 55%, #111015, #08080a, #050506);
-  }
-  100% {
-    background: radial-gradient(circle at 40% 45%, #0c0b10, #070708, #050506);
-  }
-}
-
-button:hover, select:hover, textarea:focus {
-  box-shadow: 0 0 8px #90BDE0;
+button:hover,
+select:hover,
+textarea:focus {
+  box-shadow: 0 0 8px #90bde0;
   transition: box-shadow 0.4s ease, transform 0.3s ease;
 }
 
@@ -51,7 +73,7 @@ button:active {
   background: #0b0b0d;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2f;
+  background: #2c2c2c;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -71,13 +93,13 @@ button:active {
 }
 
 .prose strong {
-  color: #90BDE0;
+  color: #90bde0;
   font-weight: 600;
 }
 
 .prose code {
   background-color: rgba(255, 200, 124, 0.08);
-  color: #90BDE0;
+  color: #90bde0;
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-weight: 500;
@@ -97,8 +119,10 @@ button:active {
 }
 
 /* Headings — subtle glow and hierarchy */
-.prose h1, .prose h2, .prose h3 {
-  color: #90BDE0;
+.prose h1,
+.prose h2,
+.prose h3 {
+  color: #90bde0;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
@@ -124,7 +148,7 @@ button:active {
 
 /* Links — faint amber glow */
 .prose a {
-  color: #90BDE0;
+  color: #90bde0;
   text-decoration: none;
   transition: color 0.2s ease, text-shadow 0.3s ease;
 }
@@ -134,7 +158,8 @@ button:active {
 }
 
 /* Lists — cleaner spacing */
-.prose ul, .prose ol {
+.prose ul,
+.prose ol {
   padding-left: 1.4em;
 }
 .prose li {
@@ -144,7 +169,7 @@ button:active {
 
 /* Blockquotes — reflective style */
 .prose blockquote {
-  border-left: 3px solid #90BDE0;
+  border-left: 3px solid #90bde0;
   padding-left: 1em;
   color: #bcbcc5;
   font-style: italic;
