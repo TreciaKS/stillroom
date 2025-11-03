@@ -20,14 +20,14 @@ const Demo = () => {
           <motion.pre
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1.2 }}
+            transition={{ delay: 0.5, duration: 1.2, ease: "circIn" }}
             className="p-5 mb-6 overflow-x-auto font-mono text-sm border bg-(--pure-graphite) rounded-xl text-(--pure-white)"
             contentEditable="true"
           >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 1 }}
+              transition={{ delay: 1, duration: 1, ease: "circIn" }}
             >
               <span className="t">function</span> greet(name) {"{"}
               {"\n"}

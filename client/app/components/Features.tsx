@@ -30,12 +30,12 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * i, duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-(--pure-graphite) rounded-2xl flex flex-col justify-center hover:translate-0.5 transition px-8 max-md:py-5"
+            className="bg-(--pure-white) shadow-md/20 border border-gray-400/20 rounded-2xl flex flex-col justify-center hover:translate-0.5 transition px-8 max-md:py-5"
           >
-            <h3 className="text-2xl font-medium text-(--solar-sky) mb-3">
+            <h3 className="text-3xl font-medium text-(--pure-graphite) mb-3 max-md:text-2xl">
               {f.title}
             </h3>
-            <p className="text-(--pure-silver) leading-relaxed">{f.desc}</p>
+            <p className="text-(--pure-charcoal) leading-relaxed">{f.desc}</p>
           </motion.div>
         ))}
       </div>

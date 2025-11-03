@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative flex flex-col items-center px-6 mt-32 text-center text-(--pure-silver) max-lg:py-3 bg-(--pure-black)">
+    <section className="relative flex flex-col items-center px-6 md:mt-44 mt-32 text-center text-(--pure-silver) max-lg:py-3 bg-(--pure-black)">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
