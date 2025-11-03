@@ -4,21 +4,16 @@ const Demo = () => {
     return (
       <section
         id="demo"
-        className="relative z-10 flex flex-col items-center justify-center px-4 py-32 overflow-hidden text-center"
+        className="relative z-10 flex flex-col items-center justify-center px-4 py-25 mt-10 overflow-hidden rounded-tl-full rounded-tr-full  w-full bg-(--pure-white)"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#0b0b0d,#050506)] opacity-90" />
-        <div className="absolute inset-0 flex justify-center">
-          <div className="w-[600px] h-[600px] bg-amberish/5 blur-3xl rounded-full" />
-        </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="relative z-10 w-full max-w-3xl p-8 text-left border shadow-lg bg-neutral-950/50 border-neutral-800 rounded-2xl backdrop-blur-lg shadow-black/20"
+          className="relative z-10 w-full max-w-3xl p-8 text-left border shadow-lg bg-(--pure-black) rounded-2xl backdrop-blur-lg shadow-black/20 "
         >
-          <h3 className="mb-4 text-sm font-medium tracking-widest uppercase text-neutral-300">
+          <h3 className="mb-4 text-sm font-medium tracking-widest uppercase text-neutral-300 bg-(--pure-black)">
             See Stillroom in Action
           </h3>
 
@@ -27,7 +22,7 @@ const Demo = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.2 }}
-            className="p-5 mb-6 overflow-x-auto font-mono text-sm border bg-neutral-900 rounded-xl text-neutral-200 border-neutral-800"
+            className="p-5 mb-6 overflow-x-auto font-mono text-sm border bg-neutral-900 rounded-xl text-neutral-200"
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -49,7 +44,7 @@ const Demo = () => {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3, duration: 1 }}
+            transition={{ delay: 1.2, duration: 1 }}
             className="text-base leading-relaxed text-neutral-400"
           >
             <p className="mb-2">

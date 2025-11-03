@@ -2,7 +2,7 @@ const Mission = () => {
   return (
     <section
       id="mission"
-      className="relative z-10 text-center px-8 py-28 border-t border-neutral-800"
+      className="relative z-10 text-center px-8 py-28 bg-(--pure-white) w-full"
     >
       <h2 className="text-3xl font-light text-amberish mb-4">Free. Forever.</h2>
       <p className="text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">

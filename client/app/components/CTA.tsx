@@ -5,7 +5,7 @@ const CTA = () => {
     return (
       <section
         id="cta"
-        className="relative z-10 flex flex-col items-center text-center py-32 border-t border-neutral-800"
+        className="relative z-10 flex flex-col items-center text-center py-32 bg-(--pure-white) w-full"
       >
         <motion.h2
           initial={{ opacity: 0, y: 10 }}

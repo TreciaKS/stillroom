@@ -45,7 +45,6 @@ pre {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* avoids navbar overlap */
-  background: var(--pure-black);
 }
 
 a:hover {

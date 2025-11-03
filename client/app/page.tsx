@@ -10,7 +10,7 @@ import Hero from "./components/Hero";
 
 export default function LandingPage() {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden text-(--pure-white)">
+    <section className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden text-(--pure-white) bg-(--pure-black) ">
       <Navbar />
       <Hero />
       <Demo />
