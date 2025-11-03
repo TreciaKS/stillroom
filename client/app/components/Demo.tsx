@@ -22,6 +22,7 @@ const Demo = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.2 }}
             className="p-5 mb-6 overflow-x-auto font-mono text-sm border bg-(--pure-graphite) rounded-xl text-(--pure-white)"
+            contentEditable="true"
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -36,7 +37,7 @@ const Demo = () => {
               {"}"}
               {"\n"}
               greet(
-              <span className="text-(--solar-sky)">&quot;World&quot;</span>);
+              <span className="text-(--solar-sky)">&quot;Trecia&quot;</span>);
             </motion.div>
           </motion.pre>
 
@@ -54,7 +55,7 @@ const Demo = () => {
             <p className="text-(--pure-charcoal)">
               It prints{" "}
               <code className="bg-(--solar-ocean) text-(--pure-white) px-1 py-0.5 rounded">
-                Hello, World!
+                Hello, Trecia!
               </code>{" "}
               — demonstrating how template literals inject variables in
               JavaScript.

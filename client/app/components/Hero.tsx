@@ -39,7 +39,7 @@ const Hero = () => {
           href="https://github.com/TreciaKS/stillroom"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-8 py-3 transition border border-(--pure-gray) rounded-xl hover:border-(--solar-sand) hover:opacity-90"
+          className="px-8 py-3 transition border border-(--pure-gray) rounded-xl hover:border-(--solar-sky) hover:opacity-90"
         >
           View Source
         </a>
