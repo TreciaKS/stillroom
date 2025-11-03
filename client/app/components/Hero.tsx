@@ -31,7 +31,7 @@ const Hero = () => {
         className="flex gap-4 max-md:flex-col max-md:gap-y-5"
       >
         <Link href="/app">
-          <button className="px-8 py-3 font-medium text-(--pure-silver) transition rounded-xl border border-(--pure-silver) hover:opacity-90">
+          <button className="px-8 py-3 font-medium text-(--pure-silver) transition rounded-xl border border-(--solar-ocean) hover:opacity-90 cursor-pointer">
             Launch Stillroom
           </button>
         </Link>
