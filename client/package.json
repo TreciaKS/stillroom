@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.17.6",
+    "@lottiefiles/lottie-player": "^2.0.12",
     "@tailwindcss/typography": "^0.5.19",
     "axios": "^1.13.0",
     "framer-motion": "^12.23.24",

@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Reflection from "../components/Reflection";
 import { HistoryItem } from "../../types/types";
+import Loader from "../components/loader";
 
 export default function Home() {
   const [entry, setEntry] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
-  const [reflection, setReflection] = useState<string>("Your explanation will appear here");
+  const [reflection, setReflection] = useState<string>(
+    "Your explanation will appear here"
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -138,7 +141,7 @@ export default function Home() {
             {error}
           </p>
         )}
-        {loading && <p>Loading</p>}
+        {loading && <Loader />}
         {reflection && <Reflection text={reflection} />}
       </section>
     </main>
