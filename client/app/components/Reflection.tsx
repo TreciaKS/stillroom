@@ -8,7 +8,7 @@ import { ReflectionProps } from "../../types/types";
 export default function Reflection({ text } : ReflectionProps) {
   return (
     <div className="w-full px-10 py-6 rounded-2xl animate-fadeIn overflow-y-auto max-md:px-5">
-      <div className="prose prose-invert prose-pre:bg-(--pure-black) prose-pre:text-(--solar-sunlight) prose-code:text-(--solar-skin) prose-headings:text-(--solar-skin) max-w-none text-center">
+      <div className="prose prose-invert prose-pre:bg-(--pure-black) prose-pre:text-(--solar-sunlight) prose-code:text-(--solar-skin) prose-headings:text-(--solar-skin) max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}

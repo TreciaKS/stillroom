@@ -111,13 +111,13 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="bg-(--pure-graphite) overflow-y-auto px-6 pb-5 max-md:hidden">
+          <aside className="bg-(--pure-graphite) overflow-y-auto px-6 pb-5 max-md:hidden h-full">
             <h3 className="pl-2 text-center text-lg tracking-wider font-semibold text-(--pure-white) bg-(--pure-graphite) sticky top-0 py-4">
               History
             </h3>
             <div className="space-y-3">
               {history.length === 0 && (
-                <p className="text-neutral-600">No saved explanations yet.</p>
+                <p className="text-neutral-600">No remembered explanations yet</p>
               )}
               {history.map((h, i) => (
                 <div
