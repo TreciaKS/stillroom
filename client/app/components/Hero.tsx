@@ -21,7 +21,7 @@ const Hero = () => {
         className="max-w-xl mx-auto mb-10 text-lg text-neutral-400 tracking-wider"
       >
         Because there&apos;s{" "}
-        <span className="text-(--pure-white)">still room</span> to learn
+        <span className="text-(--pure-black) bg-(--solar-sky) rounded-md px-1">still room</span> to learn
       </motion.p>
 
       <motion.div

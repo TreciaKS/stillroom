@@ -22,7 +22,6 @@ const Demo = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.2, ease: "circIn" }}
             className="p-5 mb-6 overflow-x-auto font-mono text-sm border bg-(--pure-graphite) rounded-xl text-(--pure-white)"
-            contentEditable="true"
           >
             <motion.div
               initial={{ opacity: 0 }}

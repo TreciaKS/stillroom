@@ -7,7 +7,7 @@ import { HistoryItem } from "../../types/types";
 export default function Home() {
   const [entry, setEntry] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
-  const [reflection, setReflection] = useState<string>("");
+  const [reflection, setReflection] = useState<string>("Your explanation will appear here");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -18,6 +18,15 @@ export default function Home() {
     const saved = localStorage.getItem("stillroom_history");
     if (saved) setHistory(JSON.parse(saved));
   }, []);
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text/plain"); // plain text only
+    const start = e.currentTarget.selectionStart;
+    const end = e.currentTarget.selectionEnd;
+    const newValue = entry.slice(0, start) + text + entry.slice(end);
+    setEntry(newValue);
+  };
 
   const submit = async () => {
     setError("");
@@ -52,83 +61,86 @@ export default function Home() {
   };
 
   return (
-    <main className="flex items-start justify-center min-h-screen p-8">
-      <div className="w-full max-w-4xl">
-        <header className="mb-6">
-          <h1 className="text-4xl font-light text-amberish">Stillroom</h1>
-          <p className="italic text-neutral-400">
-            For when your code needs to make sense.
-          </p>
-        </header>
+    <main className="bg-(--pure-black) overflow-hidden">
+      <section className="flex relative h-screen max-md:flex-col-reverse max-md:overflow-y-auto">
+        <div className="lg:w-1/3 flex flex-col-reverse md:w-1/2">
+          <div className="py-6 px-4 bg-(--pure-graphite) max-md:py-4 max-md:bg-(--pure-black)">
+            <textarea
+              value={entry}
+              onPaste={handlePaste}
+              onChange={(e) => setEntry(e.target.value)}
+              placeholder="Paste your code here..."
+              className="w-full mb-2 font-mono text-sm border h-60 max-md:h-30"
+            />
 
-        <section className="p-6 border bg-neutral-900 border-neutral-800 rounded-3xl">
-          <textarea
-            value={entry}
-            onChange={(e) => setEntry(e.target.value)}
-            placeholder="Paste your code here..."
-            className="w-full p-4 font-mono text-sm border h-60 rounded-xl bg-neutral-950 border-neutral-800 text-neutral-100 focus:outline-none focus:ring-2 focus:ring-amberish"
-          />
-
-          <div className="flex items-center gap-3 mt-4">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="px-3 py-2 border rounded-lg bg-neutral-900 border-neutral-800 text-neutral-300"
-            >
-              <option value="">Autodetect</option>
-              <option value="JavaScript">JavaScript</option>
-              <option value="TypeScript">TypeScript</option>
-              <option value="C#">C#</option>
-              <option value="Python">Python</option>
-              <option value="SQL">SQL</option>
-            </select>
-
-            <button
-              onClick={submit}
-              disabled={loading}
-              className="px-4 py-2 font-medium text-black rounded-lg bg-amberish disabled:opacity-60"
-            >
-              {loading ? "Explaining…" : "Explain"}
-            </button>
-
-            <button
-              onClick={() => {
-                setEntry("");
-                setReflection("");
-              }}
-              className="px-3 py-2 border rounded-lg border-neutral-700 text-neutral-300"
-            >
-              Clear
-            </button>
-          </div>
-
-          {error && <p className="mt-3 text-rose-400">{error}</p>}
-          {reflection && <Reflection text={reflection} />}
-        </section>
-
-        <aside className="mt-6">
-          <h3 className="mb-2 text-sm text-neutral-400">History</h3>
-          <div className="space-y-3">
-            {history.length === 0 && (
-              <p className="text-neutral-600">No saved explanations yet.</p>
-            )}
-            {history.map((h, i) => (
-              <div
-                key={i}
-                className="p-3 border bg-neutral-900 border-neutral-800 rounded-xl"
+            <div className="flex justify-between gap-x-4 max-md:text-sm max-md:">
+              <button
+                onClick={() => {
+                  setEntry("");
+                  setReflection("");
+                }}
+                className="px-8 py-3 transition text-(--pure-silver) border border-(--pure-charcoal) rounded-xl hover:opacity-60 cursor-pointer max-lg:py-2 max-lg:px-5"
               >
-                <div className="text-sm italic truncate text-neutral-300">
-                  {h.entry}
-                </div>
-                <div className="mt-1 text-xs text-neutral-500">
-                  {h.language ?? "Auto-detect"} •{" "}
-                  {new Date(h.ts).toLocaleString()}
-                </div>
+                Clear
+              </button>
+              <div className="flex justify-between gap-x-2">
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="px-5 py-2 border rounded-lg bg-(--pure-charcoal) border-(--pure-charcoal) text-(--pure-white)"
+                >
+                  <option value="">Autodetect</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="TypeScript">TypeScript</option>
+                  <option value="C#">C#</option>
+                  <option value="Python">Python</option>
+                  <option value="SQL">SQL</option>
+                </select>
+
+                <button
+                  onClick={submit}
+                  disabled={loading}
+                  className="px-8 py-3 font-medium text-(--solar-sky) transition rounded-xl border border-(--solar-sky) hover:opacity-60 cursor-pointer"
+                >
+                  {loading ? "Explaining…" : "Explain"}
+                </button>
               </div>
-            ))}
+            </div>
           </div>
-        </aside>
-      </div>
+
+          <aside className="bg-(--pure-graphite) overflow-y-auto px-6 pb-5 max-md:hidden">
+            <h3 className="pl-2 text-center text-lg tracking-wider font-semibold text-(--pure-white) bg-(--pure-graphite) sticky top-0 py-4">
+              History
+            </h3>
+            <div className="space-y-3">
+              {history.length === 0 && (
+                <p className="text-neutral-600">No saved explanations yet.</p>
+              )}
+              {history.map((h, i) => (
+                <div
+                  key={i}
+                  className="p-3 border bg-(--pure-graphite) border-(--pure-gray)/20 rounded-xl shadow-md"
+                >
+                  <div className="text-sm italic truncate text-(--pure-silver)">
+                    {h.entry}
+                  </div>
+                  <div className="mt-1 text-xs text-(--pure-gray)">
+                    {h.language ?? "Auto-detect"} •{" "}
+                    {new Date(h.ts).toLocaleString()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </aside>
+        </div>
+        {error && (
+          <p className="mt-3 text-(--pure-white) bg-(--solar-ocean) px-5 py-4 z-50 rounded-lg absolute right-8 top-4">
+            {error}
+          </p>
+        )}
+        {loading && <p>Loading</p>}
+        {reflection && <Reflection text={reflection} />}
+      </section>
     </main>
   );
 }

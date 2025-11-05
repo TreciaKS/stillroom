@@ -44,11 +44,48 @@ pre {
 *,
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* avoids navbar overlap */
+  scroll-padding-top: 80px;
+}
+
+::selection {
+  background: var(--solar-sky);
+  color: var(--pure-black);
+}
+
+* {
+  --sb-track-color: var(--pure-black);
+  --sb-thumb-color: var(--pure-graphite);
+  --sb-size: 9px;
+}
+
+::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pure-graphite);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 10px;
+  border: 2px solid var(--pure-black);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }
 
 a:hover {
- color: var(--solar-sky);
+  color: var(--solar-sky);
+}
+
+textarea:focus-visible {
+  outline: var(--focus);
+  outline-offset: 2px;
 }
 
 /* Smooth scrollbars (dark aesthetic) */
@@ -133,6 +170,9 @@ a:hover {
   color: #e0e0e3;
 }
 
+.prose {
+  color:white;
+}
 /* Links — faint amber glow */
 .prose a {
   color: #90bde0;
@@ -158,7 +198,7 @@ a:hover {
 .prose blockquote {
   border-left: 3px solid #90bde0;
   padding-left: 1em;
-  color: #bcbcc5;
+  color: #ff0090;
   font-style: italic;
 }
 
@@ -166,4 +206,28 @@ a:hover {
 .prose hr {
   border-color: rgba(255, 200, 124, 0.1);
   margin: 1.5em 0;
+}
+
+textarea {
+  border: 1px solid var(--pure-charc);
+  background: var(--pure-charcoal);
+  color: var(--pure-white);
+  resize: none;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pure-gray);
+  border-color: var(--pure-gray);
+}
+
+select {
+  appearance: none;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
 }
