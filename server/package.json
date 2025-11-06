@@ -12,7 +12,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
-    "groq-sdk": "^0.34.0"
+    "groq-sdk": "^0.34.0",
+    "serverless-http": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
