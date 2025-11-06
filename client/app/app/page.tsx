@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <main className="bg-(--pure-black) overflow-hidden">
       <section className="flex relative h-screen max-md:flex-col-reverse max-md:overflow-y-auto">
-        <div className="lg:w-1/3 flex flex-col-reverse md:w-1/2">
+        <div className="lg:w-110 flex flex-col-reverse md:w-120">
           <div className="py-6 px-4 bg-(--pure-graphite) max-md:py-4 max-md:bg-(--pure-black)">
             <textarea
               value={entry}
@@ -115,9 +115,11 @@ export default function Home() {
             <h3 className="pl-2 text-center text-lg tracking-wider font-semibold text-(--pure-white) bg-(--pure-graphite) sticky top-0 py-4">
               History
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-3 w-95">
               {history.length === 0 && (
-                <p className="text-neutral-600">No remembered explanations yet</p>
+                <p className="text-neutral-600">
+                  No remembered explanations yet
+                </p>
               )}
               {history.map((h, i) => (
                 <div

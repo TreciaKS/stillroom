@@ -8,7 +8,7 @@ pre {
 }
 
 :root {
-  /* Core palette */
+  /* Pure Heroine */
   --pure-black: #0e0e0e;
   --pure-graphite: #1e1e1e;
   --pure-charcoal: #2c2c2c;
@@ -16,6 +16,7 @@ pre {
   --pure-gray: #8d8d8d;
   --pure-white: #e6e6e6;
 
+  /* `Solar Power */
   --solar-yellow: #f5d244;
   --solar-sky: #5eb8f2;
   --solar-sand: #e2a65f;
@@ -23,7 +24,6 @@ pre {
   --solar-skin: #d48a4e;
   --solar-ocean: #154e7a;
 
-  /* Semantic tokens */
   --bg-00: var(--pure-black); /* main page background */
   --bg-10: var(--pure-graphite); /* secondary background / panels */
   --bg-20: var(--pure-charcoal); /* elevated surfaces */
@@ -104,7 +104,6 @@ textarea:focus-visible {
   background: #3a3a3f;
 }
 
-/* Markdown typography (using Tailwind’s prose classes) */
 .prose {
   max-width: 100%;
   line-height: 1.75;
@@ -113,42 +112,49 @@ textarea:focus-visible {
 .prose p {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
-  color: #d4d4d8;
 }
 
 .prose strong {
-  color: #90bde0;
+  background-color: var(--solar-sky);
+  color: var(--pure-black);
   font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .prose code {
-  background-color: rgba(255, 200, 124, 0.08);
-  color: #90bde0;
-  padding: 0.2em 0.4em;
+  background-color: var(--pure-graphite);
+  color: var(--solar-sky);
+  padding: 0.5em;
   border-radius: 4px;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .prose pre {
-  background-color: #0b0b0d;
-  border: 1px solid #222226;
+  background-color: var(--pure-black);
+  color: var(--pure-white);
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 0.2rem;
   overflow-x: auto;
   transition: box-shadow 0.3s ease;
+  /* box-shadow: 0 0 1px 0.4px var(--solar-sky); */
 }
 
 .prose pre:hover {
-  box-shadow: 0 0 10px rgba(255, 200, 124, 0.15);
+  box-shadow: 0 0 10px var(--solar-ocean);
+  cursor: pointer;
 }
 
-/* Headings — subtle glow and hierarchy */
 .prose h1,
 .prose h2,
 .prose h3 {
-  color: #90bde0;
+  font-size: 2rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+  background-color: var(--solar-ocean);
+  color: var(--pure-white);
+  padding-left: 0.5rem;
 }
 
 .prose h1 {
@@ -167,44 +173,41 @@ textarea:focus-visible {
   font-size: 1.15rem;
   margin-top: 1em;
   margin-bottom: 0.4em;
-  color: #e0e0e3;
 }
 
 .prose {
-  color:white;
+  color: var(--pure-white);
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.55rem;
 }
-/* Links — faint amber glow */
+
 .prose a {
-  color: #90bde0;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.2s ease, text-shadow 0.3s ease;
 }
-.prose a:hover {
-  color: #ffe3b0;
-  text-shadow: 0 0 8px rgba(255, 200, 124, 0.25);
-}
 
-/* Lists — cleaner spacing */
 .prose ul,
 .prose ol {
   padding-left: 1.4em;
+  color: var(--pure-white);
 }
+
 .prose li {
+  color: var(--pure-white);
   margin-top: 0.3em;
   margin-bottom: 0.3em;
 }
 
-/* Blockquotes — reflective style */
 .prose blockquote {
-  border-left: 3px solid #90bde0;
   padding-left: 1em;
-  color: #ff0090;
+  color: var(--solar-sunlight);
   font-style: italic;
 }
 
-/* Horizontal rule — soft separation */
 .prose hr {
-  border-color: rgba(255, 200, 124, 0.1);
+  border-color: var(--solar-sky);
   margin: 1.5em 0;
 }
 
@@ -217,7 +220,8 @@ textarea {
   padding: 8px;
 }
 
-textarea:focus, select:focus {
+textarea:focus,
+select:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--pure-gray);
   border-color: var(--pure-gray);

@@ -4,7 +4,7 @@
   display: block;
   overflow-x: auto;
   background: #0b0b0d;
-  color: #d1d5db;
+  color: var(--pure-white);
   padding: 1rem;
   border-radius: 0.75rem;
   line-height: 1.6;
@@ -13,7 +13,7 @@
 /* Comments, quotes */
 .hljs-comment,
 .hljs-quote {
-  color: #5e5e68;
+  color: var(--pure-white);
   font-style: italic;
 }
 
@@ -21,14 +21,14 @@
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #ffc87c;
+  color: var(--pure-white);
   font-weight: 500;
 }
 
 /* Strings, chars */
 .hljs-string,
 .hljs-doctag {
-  color: #bdb2ff;
+  color: var(--solar-sand);
 }
 
 /* Numbers, constants */
@@ -36,20 +36,20 @@
 .hljs-literal,
 .hljs-symbol,
 .hljs-bullet {
-  color: #7ee0e0;
+  color: var(--solar-sunlight);
 }
 
 /* Function names */
 .hljs-title,
 .hljs-section {
-  color: #ffd27f;
+  color: var(--pure-white);
   font-weight: 600;
 }
 
 /* Types and classes */
 .hljs-type,
 .hljs-class .hljs-title {
-  color: #ffbb80;
+  color: var(--solar-yellow);;
   font-weight: 500;
 }
 
@@ -57,25 +57,25 @@
 .hljs-attr,
 .hljs-variable,
 .hljs-template-variable {
-  color: #e2bfff;
+  color: var(--solar-sand);;
 }
 
 /* Built-ins and tags */
 .hljs-built_in,
 .hljs-tag {
-  color: #f7ba50;
+  color: var(--solar-sunlight);;
 }
 
 /* Addition / diff highlight */
 .hljs-addition {
-  color: #a4fba6;
-  background: rgba(164, 251, 166, 0.05);
+  color: var(--solar-sky);
+  background: var(--pure-graphite);
 }
 
 /* Deletion / diff highlight */
 .hljs-deletion {
-  color: #ff9e9e;
-  background: rgba(255, 158, 158, 0.05);
+  color: var(--pure-graphite);
+  background: var(--pure-graphite);
 }
 
 /* Emphasis and strong */
