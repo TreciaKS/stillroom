@@ -51,7 +51,6 @@ router.post("/", async (req, res) => {
     const reflection = completion?.choices?.[0]?.message?.content?.trim() || "";
     return res.json({ reflection });
   } catch (err) {
-    console.error("Groq error:", err?.response?.data || err?.message || err);
     return res.status(500).json({
       error:
         err?.response?.data?.error?.message ||
