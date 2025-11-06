@@ -19,4 +19,6 @@ app.get("/", (req, res) => {
 app.use("/analyze", analyzeRouter);
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  `Server is running on port ${PORT}`;
+});
