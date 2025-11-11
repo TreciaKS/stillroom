@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 10
-    }
-  },
-  "routes": [{ "src": "/api/(.*)", "dest": "api/index.js" }],
-  "env": {
-    "AI_API_URL": "https://api.groq.com/openai/v1/chat/completions",
-    "AI_API_KEY": "@ai_api_key",
-    "MODEL": "llama3-8b-8192"
-  }
+  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/index.js" },
+    { "src": "/", "dest": "/index.js" }
+  ]
 }

@@ -54,7 +54,7 @@ const Demo = () => {
             <p className="text-(--pure-charcoal)">
               It prints{" "}
               <code className="bg-(--solar-ocean) text-(--pure-white) px-1 py-0.5 rounded">
-                Hello, Trecia!
+                Hello, Trecia
               </code>{" "}
               — demonstrating how template literals inject variables in
               JavaScript.

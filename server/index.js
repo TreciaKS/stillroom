@@ -21,11 +21,4 @@ app.use("/analyze", analyzeRouter);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Stillroom server listening on port ${PORT}`);
-  if (process.env.GROQ_API_KEY) {
-    console.log(
-      `GROQ key loaded (prefix): ${process.env.GROQ_API_KEY.slice(0, 5)}...`
-    );
-  } else {
-    console.warn("GROQ_API_KEY not set. Set GROQ_API_KEY in .env");
-  }
 });
