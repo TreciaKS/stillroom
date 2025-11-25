@@ -103,9 +103,11 @@ export default function Home() {
                 <button
                   onClick={submit}
                   disabled={loading}
-                  className="px-8 py-3 font-medium text-(--solar-sky) transition rounded-xl border border-(--solar-sky) hover:opacity-60 cursor-pointer"
+                  className={`px-8 py-3 font-medium text-(--solar-sky) transition rounded-xl border border-(--solar-sky) hover:opacity-60 ${
+                  loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                  }`}
                 >
-                  {loading ? "Explaining…" : "Explain"}
+                  Explain
                 </button>
               </div>
             </div>
