@@ -8,3 +8,9 @@ export type HistoryItem = {
 export interface ReflectionProps {
   text: string;
 }
+
+export interface CodeBlockProps {
+  inline?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}
