@@ -54,7 +54,6 @@ export default function Home() {
       setHistory(newHist);
       localStorage.setItem("stillroom_history", JSON.stringify(newHist));
     } catch (err: unknown) {
-      console.log(err);
       if (err === "string") {
         setError(err || "Something went wrong.");
       }
