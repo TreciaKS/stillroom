@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "../../styles/stillroom-dark.css";
 import { ReflectionProps } from "../../types/types";
+// import CodeBlock from "./CodeBlock"
 
 export default function Reflection({ text } : ReflectionProps) {
   return (
@@ -12,6 +13,9 @@ export default function Reflection({ text } : ReflectionProps) {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}
+          // components={{
+          //   code: CodeBlock, // need to figure out how to implement without breaking UI
+          // }}
         >
           {text}
         </ReactMarkdown>
